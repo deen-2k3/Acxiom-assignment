@@ -3,7 +3,7 @@
 # Admin 
 **userId="admin"**
 
-**password=""
+**password="securePassword123"**
 
 *Overview*
 
