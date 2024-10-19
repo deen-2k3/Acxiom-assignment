@@ -1,5 +1,9 @@
 # Library Management System (LMS)
 
+# Admin 
+**userId="admin"**
+
+**password=""
 
 *Overview*
 
