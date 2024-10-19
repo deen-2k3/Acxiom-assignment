@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import image from "../assets/image.png"; // Adjust the import statement for the image
 
 const AdminHome = () => {
+  const [isOpen, setIsOpen] = useState(false); // State to manage mobile menu visibility
+  const [isImageOpen, setIsImageOpen] = useState(false); // State for fullscreen image
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen); // Toggle mobile menu visibility
+  };
+
+  const openImageModal = () => {
+    setIsImageOpen(true); // Open the fullscreen image modal
+  };
+
+  const closeImageModal = () => {
+    setIsImageOpen(false); // Close the fullscreen image modal
+  };
+
   return (
     <div>
       <nav className="bg-blue-600 shadow-lg">
@@ -35,8 +51,11 @@ const AdminHome = () => {
               </Link>
             </div>
             <div className="md:hidden">
-              <button className="text-white focus:outline-none">
-                {/* Add a hamburger menu icon here if needed */}
+              <button
+                onClick={toggleMenu}
+                className="text-white focus:outline-none"
+              >
+                {/* Hamburger menu icon */}
                 <svg
                   className="h-6 w-6"
                   fill="none"
@@ -54,8 +73,63 @@ const AdminHome = () => {
               </button>
             </div>
           </div>
+          {/* Mobile Menu */}
+          {isOpen && (
+            <div className="md:hidden mt-2">
+              <Link
+                to="/maintenance"
+                className="block text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium"
+                onClick={toggleMenu} // Close menu after clicking a link
+              >
+                Maintenance
+              </Link>
+              <Link
+                to="/reports"
+                className="block text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium"
+                onClick={toggleMenu} // Close menu after clicking a link
+              >
+                Reports
+              </Link>
+              <Link
+                to="/transactions"
+                className="block text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium"
+                onClick={toggleMenu} // Close menu after clicking a link
+              >
+                Transactions
+              </Link>
+              <Link
+                to="/logout"
+                className="block text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium"
+                onClick={toggleMenu} // Close menu after clicking a link
+              >
+                Logout
+              </Link>
+            </div>
+          )}
         </div>
       </nav>
+
+      {/* Image below the navbar, only for desktop */}
+      <div className="hidden md:flex justify-center my-4">
+        <img
+          src={image}
+          alt="A stack of books on a table at a library"
+          className="max-w-full h-auto rounded-md shadow-lg cursor-pointer"
+          onClick={openImageModal} // Open modal on image click
+        />
+      </div>
+
+      {/* Fullscreen Image Modal */}
+      {isImageOpen && (
+        <div className="">
+          <img
+            src={image}
+            alt="A stack of books on a table at a library"
+            className=""
+            onClick={closeImageModal} // Close modal on image click
+          />
+        </div>
+      )}
     </div>
   );
 };
